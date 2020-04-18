@@ -5,13 +5,44 @@
 This application is the second Project for the [Blockchain Nanodegree](https://www.udacity.com/course/blockchain-developer-nanodegree--nd1309) with __Udacity__. Enjoy and feel free to comment!
 
 ## Truffle version and OpenZeppelin version used in the project.
-## Your ERC-721 Token Name
-## Your ERC-721 Token Symbol
-## Your “Token Address” on the Rinkeby Network
+
+This project was built using the following framework versions:
+
+* Truffle v5.1.14-nodeLTS.0 (core: 5.1.13)
+* OpenZeppelin (openzeppelin-solidity) v2.1.2
+* Solidity v0.5.16 (solc-js)
+* Node v12.14.1
+* Web3.js v1.2.1
+* Truffle Assertions v0.9.2
+
+## ERC-721 Token Name
+
+The ERC-721 Token Name is **DJ Star Token**
+
+## ERC-721 Token Symbol
+
+ERC-721 Token Symbol is **DJST**
+
+## “Token Address” on the Rinkeby Network
+
+The Token Address of Token ID 1 on Rinkeby Network is: **0xa96762affa98bb7523227f9c5ae5bd1eaebea00c** and can be viewed on the Rinkeby Etherscan website [here](https://rinkeby.etherscan.io/token/0xa96762affa98bb7523227f9c5ae5bd1eaebea00c)
+
+ERC-721 Token Contract Address is: **0xa96762affa98bb7523227f9c5ae5bd1eaebea00c** and can be viewd on the Rinkeby Etherscan website [here](https://rinkeby.etherscan.io/address/0xa96762affa98bb7523227f9c5ae5bd1eaebea00c).
 
 ## Run the application
 
-[TODO] ...
+To run the back end using Truffle, simply run:
+
+```
+truffle develop
+```
+
+To run the front end app, simply run:
+
+```
+cd app
+npm run dev
+```
 
 ### Issue Reporting
 
