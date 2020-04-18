@@ -10,7 +10,7 @@ This application is the second Project for the [Blockchain Nanodegree](https://w
 
 ### Issue Reporting
 
-If you experience with bugs or need further improvement, please create a new issue under [Issues](https://github.com/jensendarren/private-blockchain-star-ownership-tracking/issues).
+If you experience with bugs or need further improvement, please create a new issue under [Issues](https://github.com/jensendarren/star-notary-ethereum-dapp-cryptostar/issues).
 
 ### Contributing to this private blockchain!
 
@@ -18,11 +18,11 @@ Pull requests are very welcome. Before submitting a pull request, please make su
 
 ### Authors
 
-This **Privae Blockchain: Star Ownership Tracking** application was developed as part of the Blockchain Nanodegree with [Udacity](http://www.udacity.com) and [Darren Jensen](http://www.tweetegy.com).
+This **Star Notary Ethereum Dapp** application was developed as part of the Blockchain Nanodegree with [Udacity](http://www.udacity.com) and [Darren Jensen](http://www.tweetegy.com).
 
 ### License
 
-This **Privae Blockchain: Star Ownership Tracking** application is released under [AGPL](http://www.gnu.org/licenses/agpl-3.0-standalone.html)
+This **Star Notary Ethereum Dapp** application is released under [AGPL](http://www.gnu.org/licenses/agpl-3.0-standalone.html)
 
 ### Disclaimer
 

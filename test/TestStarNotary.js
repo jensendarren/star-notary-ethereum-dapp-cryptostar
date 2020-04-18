@@ -147,15 +147,30 @@ describe('function exchangeStars()', () => {
     })
 });
 
-it('can add the star name and star symbol properly', async() => {
-    // 1. create a Star with different tokenId
-    // 2. Call the name and symbol properties in your Smart Contract and compare with the name and symbol provided
-});
-
-
-it('lets a user transfer a star', async() => {
-    // 1. create a Star with different tokenId
-    // 2. use the transferStar function implemented in the Smart Contract
-    // 3. Verify the star owner changed.
-});
-
+describe('function transferStar()', () =>{
+    let newOwner;
+    let tokenId;
+    beforeEach(async () => {
+        newOwner = accounts[1];
+        tokenId = nextTokenId();
+        instance = await StarNotary.deployed();
+        // Create a Star with different tokenId
+        await instance.createStar('A Star to Transfer later!', tokenId, {from: owner})
+    })
+    it('lets a user transfer a star', async() => {
+        // Use the transferStar function implemented in the Smart Contract
+        await instance.transferStar(newOwner, tokenId, {from: owner})
+        // Verify the star owner changed.
+        let newOwnerOfStar = await instance.ownerOf(tokenId)
+        assert.equal(newOwnerOfStar, newOwner)
+    });
+    it('rejects if the call is made by a user that does not own the star', async() => {
+        // Get a users account that does not own star being transfered
+        let user3 = accounts[3];
+        // Assert that the exchangeStars call is reverted with the expected message
+        await truffleAssert.reverts(
+            instance.transferStar(newOwner, tokenId, {from: user3}),
+            "You can't transfer a Star you don't own"
+        );
+    })
+})
