@@ -4,6 +4,11 @@
 
 This application is the second Project for the [Blockchain Nanodegree](https://www.udacity.com/course/blockchain-developer-nanodegree--nd1309) with __Udacity__. Enjoy and feel free to comment!
 
+## Truffle version and OpenZeppelin version used in the project.
+## Your ERC-721 Token Name
+## Your ERC-721 Token Symbol
+## Your “Token Address” on the Rinkeby Network
+
 ## Run the application
 
 [TODO] ...
