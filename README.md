@@ -36,12 +36,16 @@ ERC-721 Token Contract Address is: **0xa96762aFFA98bB7523227f9c5Ae5bD1eaebEa00C*
 To run the back end local development Ethereum Blockchain using Truffle, simply run:
 
 ```
+npm install
+touch .secret
 truffle develop
 ```
 
-In the truffle develop console run the tests like so:
+In the truffle develop console, compile and migrate the contracts (so that you can interact with them in the front end later) and also run the tests like so:
 
 ```
+truffle(develop)> compile
+truffle(develop)> migrate --reset
 truffle(develop)> test
 ```
 
@@ -49,6 +53,7 @@ To run the front end app, simply run:
 
 ```
 cd app
+npm install
 npm run dev
 ```
 
