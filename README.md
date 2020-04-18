@@ -50,6 +50,10 @@ cd app
 npm run dev
 ```
 
+### Travis CI Setup
+
+Thanks to [this post](https://blog.coinfabrik.com/test-solidity-smart-contracts-using-travis-ci/) from coinfabrik.com
+
 ### Issue Reporting
 
 If you experience with bugs or need further improvement, please create a new issue under [Issues](https://github.com/jensendarren/star-notary-ethereum-dapp-cryptostar/issues).
