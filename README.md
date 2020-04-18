@@ -23,18 +23,24 @@ The ERC-721 Token Name is **DJ Star Token**
 
 ERC-721 Token Symbol is **DJST**
 
-## “Token Address” on the Rinkeby Network
+## Token Address on the Rinkeby Network
 
 The Token Address of Token ID 1 on Rinkeby Network is: **0xa96762affa98bb7523227f9c5ae5bd1eaebea00c** and can be viewed on the Rinkeby Etherscan website [here](https://rinkeby.etherscan.io/token/0xa96762affa98bb7523227f9c5ae5bd1eaebea00c)
 
-ERC-721 Token Contract Address is: **0xa96762affa98bb7523227f9c5ae5bd1eaebea00c** and can be viewd on the Rinkeby Etherscan website [here](https://rinkeby.etherscan.io/address/0xa96762affa98bb7523227f9c5ae5bd1eaebea00c).
+ERC-721 Token Contract Address is: **0xa96762aFFA98bB7523227f9c5Ae5bD1eaebEa00C** and can be viewd on the Rinkeby Etherscan website [here](https://rinkeby.etherscan.io/address/0xa96762affa98bb7523227f9c5ae5bd1eaebea00c).
 
 ## Run the application
 
-To run the back end using Truffle, simply run:
+To run the back end local development Ethereum Blockchain using Truffle, simply run:
 
 ```
 truffle develop
+```
+
+In the truffle develop console run the tests like so:
+
+```
+truffle(develop)> test
 ```
 
 To run the front end app, simply run:
