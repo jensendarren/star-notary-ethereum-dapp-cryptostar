@@ -2,6 +2,7 @@
 
 set -e
 
+touch .secret
 ganache-cli --gasLimit 4500000 2> /dev/null 1> /dev/null &
 sleep 5 # to make sure ganache-cli is up and running before compiling
 rm -rf build
