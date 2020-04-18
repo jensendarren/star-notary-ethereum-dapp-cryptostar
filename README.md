@@ -33,7 +33,7 @@ ERC-721 Token Contract Address is: **0xa96762aFFA98bB7523227f9c5Ae5bD1eaebEa00C*
 
 ## Run the application
 
-To run the back end local development Ethereum Blockchain using Truffle, simply run:
+To run the backend local development Ethereum Blockchain using Truffle, simply run:
 
 ```
 npm install
@@ -49,7 +49,7 @@ truffle(develop)> migrate --reset
 truffle(develop)> test
 ```
 
-To run the front end app, simply run:
+To run the front end app, keep truffle running and go to a new terminal window and run:
 
 ```
 cd app
@@ -59,7 +59,7 @@ npm run dev
 
 ### Travis CI Setup
 
-Thanks to [this post](https://blog.coinfabrik.com/test-solidity-smart-contracts-using-travis-ci/) from coinfabrik.com
+Thanks to [this post](https://blog.coinfabrik.com/test-solidity-smart-contracts-using-travis-ci/) from [coinfabrik.com](coinfabrik.com)
 
 ### Issue Reporting
 
