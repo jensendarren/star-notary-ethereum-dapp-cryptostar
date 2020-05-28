@@ -38,7 +38,7 @@ To run the backend local development Ethereum Blockchain using Truffle, simply r
 ```
 npm install
 touch .secret
-ganache-cli -b 2 -i 5777 -m 'theme narrow finger canal enact photo census miss economy hotel often'
+ganache-cli -i 5777 -m 'theme narrow finger canal enact photo census miss economy hotel often'
 truffle console
 ```
 

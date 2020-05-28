@@ -1,20 +1,9 @@
 <template>
   <div v-if="isDrizzleInitialized" id="app">
-    <h1>StarNotary DAPP</h1>
+    <h1>StarNotary Dapp</h1>
     <Account />
-    <h2>Create a Star</h2>
-      <drizzle-contract-form
-        contractName="StarNotary"
-        method="createStar"
-        :placeholders="['Star Name', 'Token ID']"
-      />
-    <h2>View a Star</h2>
-      <!-- <p v-bind="getStarInfoFromTokenId"></p> -->
-      <drizzle-contract
-        contractName="StarNotary"
-        method="lookUptokenIdToStarInfo"
-        :methodArgs="['123124']"
-        label="Star Info" />
+    <StarForm />
+    <StarView />
   </div>
   <div v-else>
     Loading application...
@@ -25,11 +14,15 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 import Account from './components/Account.vue';
+import StarView from './components/StarView.vue';
+import StarForm from './components/StarForm.vue';
 
 @Component({
   name: 'app',
   components: {
     Account,
+    StarView,
+    StarForm,
   },
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'isDrizzleInitialized']),
