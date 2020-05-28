@@ -1,18 +1,20 @@
 <template>
   <div v-if="isDrizzleInitialized" id="app">
     <h1>StarNotary DAPP</h1>
+    <Account />
     <h2>Create a Star</h2>
       <drizzle-contract-form
         contractName="StarNotary"
         method="createStar"
-        :placeholders="['star']"
+        :placeholders="['Star Name', 'Token ID']"
       />
-      <!--
-        <br><label for="starName">Star Name:</label><input type="text" id="starName"></input>
-      <br><label for="starId">Star ID:</label><input type="text" id="starId"></input>
-      <br><br><button id="createStar" onclick="App.createStar()">Create Star</button>
-
-      await createStar(name, id).send({from: this.account});-->
+    <h2>View a Star</h2>
+      <!-- <p v-bind="getStarInfoFromTokenId"></p> -->
+      <drizzle-contract
+        contractName="StarNotary"
+        method="lookUptokenIdToStarInfo"
+        :methodArgs="['123124']"
+        label="Star Info" />
   </div>
   <div v-else>
     Loading application...
@@ -22,36 +24,19 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
+import Account from './components/Account.vue';
 
 @Component({
   name: 'app',
+  components: {
+    Account,
+  },
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'isDrizzleInitialized']),
     ...mapGetters('contracts', ['getContractData']),
-
-    // getStarInfoFromTokenId() {
-    //   let data = this.getContractData({
-    //     contract: 'StarNotary',
-    //     method: 'lookUptokenIdToStarInfo'
-    //   });
-    //   if (data === 'loading') return false;
-    //   return data
-    // },
-
-    // utils() {
-    //   return this.drizzleInstance.web3.utils
-    // }
   },
 })
-export default class App extends Vue {
-  // created() {
-  //   this.$store.dispatch('drizzle/REGISTER_CONTRACT', {
-  //     contractName: 'StarNotary',
-  //     method: 'lookUptokenIdToStarInfo',
-  //     methodArgs: [123123]
-  //   })
-  // }
-}
+export default class App extends Vue {}
 </script>
 
 <style>

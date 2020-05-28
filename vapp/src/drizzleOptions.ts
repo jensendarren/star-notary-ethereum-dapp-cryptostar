@@ -18,4 +18,5 @@ const options = {
     accounts: 15000,
   },
 };
+
 export default options;
