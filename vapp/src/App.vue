@@ -1,14 +1,64 @@
 <template>
-  <div v-if="isDrizzleInitialized" id="app">
-    <h1>StarNotary Dapp</h1>
-    <Account />
-    <StarForm />
-    <StarView />
-    <Toast />
-  </div>
-  <div v-else>
-    Loading application...
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="@/assets/star-icon.jpg"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <h1>Star Notary Service</h1>
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/jensendarren/star-notary-ethereum-dapp-cryptostar"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Github Repo</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <div v-if="isDrizzleInitialized" id="app">
+      <v-container>
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            sm="4"
+          >
+            <Account />
+          </v-col>
+          <v-col
+            cols="12"
+            sm="4"
+          >
+            <StarForm />
+          </v-col>
+          <v-col
+            cols="12"
+            sm="4"
+          >
+            <StarView />
+          </v-col>
+        </v-row>
+      </v-container>
+      <Toast />
+    </div>
+    <div v-else>
+      Loading application...
+    </div>
+  </v-app>
 </template>
 
 <script lang="ts">
@@ -40,8 +90,7 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #d8e3ee;
   margin-top: 60px;
 }
 </style>

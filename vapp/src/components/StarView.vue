@@ -1,15 +1,27 @@
 <template>
-  <div>
-    <h2>Read a Star</h2>
-    <form>
-      <input
-        v-model="tokenId"
-        type="text"
-        placeHolder="Star TokenId" />
-      <button @click.prevent='getStarInfo'>Read Star</button>
-    </form>
-    <h3>{{name}}</h3>
-  </div>
+  <v-card
+    class="mx-auto"
+    max-width="400"
+  >
+    <v-img
+      class="white--text align-end"
+      height="200px"
+      src="@/assets/stars.jpg"
+    >
+      <v-card-title>Read a Star</v-card-title>
+      <v-card-subtitle class="pb-0">{{ name }}</v-card-subtitle>
+    </v-img>
+
+    <v-card-text class="text--primary">
+      <form>
+        <input
+          v-model="tokenId"
+          type="text"
+          placeHolder="Star TokenId" />
+        <button @click.prevent='getStarInfo'>Read Star</button>
+      </form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -26,7 +38,7 @@ import { mapGetters } from 'vuex';
 export default class StarView extends Vue {
   tokenId= '';
 
-  name='';
+  name='Enter the Token ID to see your star name.';
 
   async getStarInfo() {
     this.name = await this.drizzleInstance

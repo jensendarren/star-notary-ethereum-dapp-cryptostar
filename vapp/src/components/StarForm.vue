@@ -1,56 +1,68 @@
 <template>
-  <div>
-    <h2>Claim a new Star</h2>
-    <form>
-      <p v-if="errors.length">
-        <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors" v-bind:key="error.id">{{ error }}</li>
-        </ul>
-      </p>
-      <p>
-        <label for="name">Name </label>
-        <input
-          v-model="name"
-          type="text"
-          placeHolder="Star Name"
-          required=true />
-      </p>
-      <p>
-        <label for="tokenId">Token Id </label>
-        <input
-          v-model="tokenId"
-          type="number"
-          placeHolder="Token ID" />
-      </p>
-      <p>
-        <label for="declination">Declination </label>
-        <input
-          v-model="declination"
-          type="number"
-          placeHolder="Declination" />
-      </p>
-      <p>
-        <label for="magnitude">Magnitude </label>
-        <input
-          v-model="magnitude"
-          type="number"
-          placeHolder="Magnitude" />
-      </p>
-      <p>
-        <label for="selectedConstellation">Constellation </label>
-        <select id="selectConstellation" v-model="constellation" size="1">
-          <option selected disabled id=0>Choose Constellation</option>
-          <option v-for="constellation in constellations"
-                  v-bind:key="constellation.id"
-                  :id=constellation.id>
-                  {{ constellation.name }}
-          </option>
-        </select>
-      </p>
-      <button @click.prevent='onSubmit'>Create Star</button>
-    </form>
-  </div>
+  <v-card
+    class="mx-auto"
+    max-width="400"
+  >
+    <v-img
+        class="white--text align-end"
+        height="200px"
+        src="@/assets/stars.jpg"
+      >
+        <v-card-title>Claim a new Star</v-card-title>
+        <v-card-subtitle class="pb-0">Complete the form below to claim your star!</v-card-subtitle>
+    </v-img>
+    <v-card-text class="text--primary">
+      <form>
+        <p v-if="errors.length">
+          <b>Please correct the following error(s):</b>
+          <ul>
+            <li v-for="error in errors" v-bind:key="error.id">{{ error }}</li>
+          </ul>
+        </p>
+        <p>
+          <label for="name">Name </label>
+          <input
+            v-model="name"
+            type="text"
+            placeHolder="Star Name"
+            required=true />
+        </p>
+        <p>
+          <label for="tokenId">Token Id </label>
+          <input
+            v-model="tokenId"
+            type="number"
+            placeHolder="Token ID" />
+        </p>
+        <p>
+          <label for="declination">Declination </label>
+          <input
+            v-model="declination"
+            type="number"
+            placeHolder="Declination" />
+        </p>
+        <p>
+          <label for="magnitude">Magnitude </label>
+          <input
+            v-model="magnitude"
+            type="number"
+            placeHolder="Magnitude" />
+        </p>
+        <p>
+          <label for="selectedConstellation">Constellation </label>
+          <select id="selectConstellation" v-model="constellation" size="1">
+            <option selected disabled id=0>Choose Constellation</option>
+            <option v-for="constellation in constellations"
+                    v-bind:key="constellation.id"
+                    :id=constellation.id>
+                    {{ constellation.name }}
+            </option>
+          </select>
+        </p>
+        <button @click.prevent='onSubmit'>Create Star</button>
+      </form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -66,11 +78,17 @@ import constellationData from '../store/constellationData.json';
 })
 export default class StarForm extends Vue {
   name='';
+
   tokenId='';
+
   constellation=0;
+
   declination=null;
+
   magnitude=null;
+
   constellations=constellationData;
+
   errors= [];
 
   onSubmit() {
@@ -96,7 +114,7 @@ export default class StarForm extends Vue {
       this.errors.push('Token Id required.');
     }
 
-    return this.errors.length == 0;
+    return this.errors.length === 0;
   }
 }
 </script>
