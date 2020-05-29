@@ -35,8 +35,14 @@ describe('creating new stars', () => {
         instance = await StarNotary.deployed();
     })
     it('can Create a Star', async () => {
-        await instance.createStar('Awesome Star!', tokenId, {from: accounts[0]})
-        assert.equal(await instance.tokenIdToStarInfo.call(tokenId), 'Awesome Star!')
+        name = 'Awesome Star!'
+        declination = 90
+        magnitude = 10
+        await instance.createStar(name, tokenId, declination, 10, {from: accounts[0]})
+        star = await instance.tokenIdToStarInfo.call(tokenId)
+        assert.equal(star.name, name, 'Error: new star name does not match')
+        assert.equal(star.declination, declination, 'Error: new star declination does not match')
+        assert.equal(star.magnitude, magnitude, 'Error: new star magnitude does not match')
     });
     it('should emit a new StarClaimedEvent', async () => {
         let name = 'A new event Star!';

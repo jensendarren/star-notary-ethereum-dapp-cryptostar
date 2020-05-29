@@ -12,6 +12,8 @@ contract StarNotary is ERC721Metadata {
     // Star data
     struct Star {
         string name;
+        uint8 declination;
+        uint8 magnitude;
     }
 
     // mapping the Star with the Owner Address
@@ -23,8 +25,15 @@ contract StarNotary is ERC721Metadata {
     event StarClaimedEvent(string name, uint256 tokenId, uint date);
 
     // Create Star using the Struct
-    function createStar(string memory _name, uint256 _tokenId) public { // Passing the name and tokenId as a parameters
-        Star memory newStar = Star(_name); // Star is an struct so we are creating a new Star
+    function createStar(string memory _name,
+                        uint256 _tokenId,
+                        uint8 _declination,
+                        uint8 _magnitude) public { // Passing the name and tokenId as a parameters
+        Star memory newStar = Star({
+            name: _name,
+            declination: _declination,
+            magnitude: _magnitude
+        }); // Star is an struct so we are creating a new Star
         tokenIdToStarInfo[_tokenId] = newStar; // Creating in memory the Star -> tokenId mapping
         _mint(msg.sender, _tokenId); // _mint assign the the star with _tokenId to the sender address (ownership)
         emit StarClaimedEvent(_name, _tokenId, now);
@@ -32,7 +41,7 @@ contract StarNotary is ERC721Metadata {
 
     // Putting an Star for sale (Adding the star tokenid into the mapping starsForSale, first verify that the sender is the owner)
     function putStarUpForSale(uint256 _tokenId, uint256 _price) public {
-        require(ownerOf(_tokenId) == msg.sender, "You can't sale the Star you don't owned");
+        require(ownerOf(_tokenId) == msg.sender, "You can't sell a Star you don't own!");
         starsForSale[_tokenId] = _price;
     }
 
