@@ -9,4 +9,4 @@ rm -rf build
 truffle compile
 truffle migrate --reset --network development
 truffle test
-kill -9 $(lsof -t -i:9545)
+kill -9 $(lsof -t -i:8545)
