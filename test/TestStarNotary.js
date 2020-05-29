@@ -30,12 +30,21 @@ describe('token name and symbol metadata', () => {
 })
 
 describe('creating new stars', () => {
-    it('can Create a Star', async() => {
-        let tokenId = nextTokenId();
-        let instance = await StarNotary.deployed();
+    beforeEach(async () => {
+        tokenId = nextTokenId();
+        instance = await StarNotary.deployed();
+    })
+    it('can Create a Star', async () => {
         await instance.createStar('Awesome Star!', tokenId, {from: accounts[0]})
         assert.equal(await instance.tokenIdToStarInfo.call(tokenId), 'Awesome Star!')
     });
+    it('should emit a new StarClaimedEvent', async () => {
+        let name = 'A new event Star!';
+        let res = await instance.createStar(name, tokenId, {from: accounts[0]})
+        truffleAssert.eventEmitted(res, 'StarClaimedEvent', (e) => {
+            return e.tokenId == tokenId && e.name == name
+        })
+    })
 });
 
 describe('buying and selling stars', () => {

@@ -10,9 +10,9 @@ const options = {
   },
   // The contracts to monitor
   contracts: [StarNotary],
-  // events: {
-  //   StarNotary: ["StarRegisterd"]
-  // },
+  events: {
+    StarNotary: ['StarClaimedEvent'],
+  },
   polls: {
     // check accounts every 15 seconds
     accounts: 15000,

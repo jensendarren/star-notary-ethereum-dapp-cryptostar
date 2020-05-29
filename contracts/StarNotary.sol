@@ -19,12 +19,15 @@ contract StarNotary is ERC721Metadata {
     // mapping the TokenId and price
     mapping(uint256 => uint256) public starsForSale;
 
+    // Events - StarClaimedEvent
+    event StarClaimedEvent(string name, uint256 tokenId, uint date);
 
     // Create Star using the Struct
     function createStar(string memory _name, uint256 _tokenId) public { // Passing the name and tokenId as a parameters
         Star memory newStar = Star(_name); // Star is an struct so we are creating a new Star
         tokenIdToStarInfo[_tokenId] = newStar; // Creating in memory the Star -> tokenId mapping
         _mint(msg.sender, _tokenId); // _mint assign the the star with _tokenId to the sender address (ownership)
+        emit StarClaimedEvent(_name, _tokenId, now);
     }
 
     // Putting an Star for sale (Adding the star tokenid into the mapping starsForSale, first verify that the sender is the owner)

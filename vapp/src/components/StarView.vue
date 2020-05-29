@@ -8,7 +8,6 @@
         placeHolder="Star TokenId" />
       <button @click.prevent='getStarInfo'>Read Star</button>
     </form>
-    <!-- <p v-if="getStarInfo"> {{ getStarInfo() }}</p> -->
     <h3>{{name}}</h3>
   </div>
 </template>
@@ -21,39 +20,19 @@ import { mapGetters } from 'vuex';
   name: 'StarView',
   computed: {
     ...mapGetters('contracts', ['getContractData']),
-    ...mapGetters('drizzle', ['drizzleInstance']),
-  }
+    ...mapGetters('drizzle', ['drizzleInstance', 'drizzleState']),
+  },
 })
 export default class StarView extends Vue {
-  tokenId= '1111';
-  name=''
+  tokenId= '';
 
-  getStarInfo() {
-    this.name = this.drizzleInstance
+  name='';
+
+  async getStarInfo() {
+    this.name = await this.drizzleInstance
       .contracts.StarNotary
-      .methods.lookUptokenIdToStarInfo
-      .cacheCall(this.tokenId);
-
-    // console.log(dataKey);
-
-    // this.name = this.$store.state.contracts.StarNotary.methods.lookUptokenIdToStarInfo[dataKey].value;
-
-    // const data = this.getContractData({
-    //   contract: 'StarNotary',
-    //   method: 'lookUptokenIdToStarInfo',
-    //   methodArgs: [this.tokenId],
-    // });
-    // if (data === 'loading') return false;
-    // return data
+      .methods.lookUptokenIdToStarInfo(this.tokenId).call();
   }
-
-  // created(){
-  //   this.$store.dispatch('drizzle/REGISTER_CONTRACT', {
-  //     contractName: 'StarNotary',
-  //     method: 'lookUptokenIdToStarInfo',
-  //     methodArgs: [this.tokenId],
-  //   })
-  // }
 }
 </script>
 

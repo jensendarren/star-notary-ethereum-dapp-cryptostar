@@ -4,6 +4,7 @@
     <Account />
     <StarForm />
     <StarView />
+    <Toast />
   </div>
   <div v-else>
     Loading application...
@@ -16,6 +17,7 @@ import { mapGetters } from 'vuex';
 import Account from './components/Account.vue';
 import StarView from './components/StarView.vue';
 import StarForm from './components/StarForm.vue';
+import Toast from './components/Toast.vue';
 
 @Component({
   name: 'app',
@@ -23,6 +25,7 @@ import StarForm from './components/StarForm.vue';
     Account,
     StarView,
     StarForm,
+    Toast,
   },
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'isDrizzleInitialized']),
