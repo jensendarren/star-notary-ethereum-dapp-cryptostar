@@ -52,8 +52,8 @@
             <StarView />
           </v-col>
         </v-row>
+        <Starbar />
       </v-container>
-      <Toast />
     </div>
     <div v-else>
       Loading application...
@@ -65,17 +65,17 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 import Account from './components/Account.vue';
+import Starbar from './components/Starbar.vue';
 import StarView from './components/StarView.vue';
 import StarForm from './components/StarForm.vue';
-import Toast from './components/Toast.vue';
 
 @Component({
   name: 'app',
   components: {
     Account,
+    Starbar,
     StarView,
     StarForm,
-    Toast,
   },
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'isDrizzleInitialized']),

@@ -14,11 +14,16 @@
 
     <v-card-text class="text--primary">
       <form>
-        <input
+        <v-text-field
+          label="Star TokenId"
           v-model="tokenId"
           type="text"
-          placeHolder="Star TokenId" />
-        <button @click.prevent='getStarInfo'>Read Star</button>
+        ></v-text-field>
+        <v-btn @click.prevent='getStarInfo'
+                outlined
+                color='primary'>
+          Read Star
+        </v-btn>
       </form>
     </v-card-text>
   </v-card>
@@ -31,7 +36,6 @@ import { mapGetters } from 'vuex';
 @Component({
   name: 'StarView',
   computed: {
-    ...mapGetters('contracts', ['getContractData']),
     ...mapGetters('drizzle', ['drizzleInstance', 'drizzleState']),
   },
 })

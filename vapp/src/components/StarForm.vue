@@ -19,47 +19,40 @@
             <li v-for="error in errors" v-bind:key="error.id">{{ error }}</li>
           </ul>
         </p>
+        <v-text-field
+          label="Star Name"
+          v-model="name"
+          type="text"
+          required=true
+        ></v-text-field>
+        <v-text-field
+          label="Token Id"
+          v-model="tokenId"
+          type="number"
+        ></v-text-field>
+        <v-text-field
+          label="Declination"
+          v-model="declination"
+          type="number"
+        ></v-text-field>
+        <v-text-field
+          label="Magnitude"
+          v-model="magnitude"
+          type="number"
+        ></v-text-field>
         <p>
-          <label for="name">Name </label>
-          <input
-            v-model="name"
-            type="text"
-            placeHolder="Star Name"
-            required=true />
+          <v-select
+            :items="constellations"
+            item-text="name"
+            item-value="id"
+            label="Constellation"
+          ></v-select>
         </p>
-        <p>
-          <label for="tokenId">Token Id </label>
-          <input
-            v-model="tokenId"
-            type="number"
-            placeHolder="Token ID" />
-        </p>
-        <p>
-          <label for="declination">Declination </label>
-          <input
-            v-model="declination"
-            type="number"
-            placeHolder="Declination" />
-        </p>
-        <p>
-          <label for="magnitude">Magnitude </label>
-          <input
-            v-model="magnitude"
-            type="number"
-            placeHolder="Magnitude" />
-        </p>
-        <p>
-          <label for="selectedConstellation">Constellation </label>
-          <select id="selectConstellation" v-model="constellation" size="1">
-            <option selected disabled id=0>Choose Constellation</option>
-            <option v-for="constellation in constellations"
-                    v-bind:key="constellation.id"
-                    :id=constellation.id>
-                    {{ constellation.name }}
-            </option>
-          </select>
-        </p>
-        <button @click.prevent='onSubmit'>Create Star</button>
+        <v-btn @click.prevent='onSubmit'
+                outlined
+                color='primary'>
+          Create Star
+        </v-btn>
       </form>
     </v-card-text>
   </v-card>
