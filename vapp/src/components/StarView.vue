@@ -9,7 +9,7 @@
       src="@/assets/stars.jpg"
     >
       <v-card-title>Read a Star</v-card-title>
-      <v-card-subtitle class="pb-0">{{ name }}</v-card-subtitle>
+      <v-card-subtitle id="name" class="pb-0">{{ name }}</v-card-subtitle>
     </v-img>
 
     <v-card-text class="text--primary">
@@ -19,7 +19,7 @@
           v-model="tokenId"
           type="text"
         ></v-text-field>
-        <v-btn @click.prevent='getStarInfo'
+        <v-btn id='btnGetStarInfo' @click.native='getStarInfo'
                 outlined
                 color='primary'>
           Read Star
