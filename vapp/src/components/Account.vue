@@ -10,12 +10,12 @@
       src="@/assets/stars.jpg"
     >
       <v-card-title>Account</v-card-title>
-      <v-card-subtitle class="pb-0">{{ activeAccount }}</v-card-subtitle>
+      <v-card-subtitle id='account' class="pb-0">{{ activeAccount }}</v-card-subtitle>
     </v-img>
 
     <v-card-text class="text--primary">
       <div>Balance: </div>
-      <div>{{ activeBalance }}</div>
+      <div id='balance'>{{ activeBalance }}</div>
     </v-card-text>
   </v-card>
 </template>
