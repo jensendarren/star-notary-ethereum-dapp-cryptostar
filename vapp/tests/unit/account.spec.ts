@@ -13,6 +13,7 @@ describe('Account.vue', () => {
   let store: any;
   const account = '0xC01011611e3501C6b3F6dC4B6d3FE644d21aB301';
   const balance = '99948855600000000000';
+  let wrapper: any;
 
   beforeEach(() => {
     store = new Vuex.Store({
@@ -26,11 +27,10 @@ describe('Account.vue', () => {
         },
       },
     });
+    wrapper = shallowMount(Account, { store, localVue });
   });
 
   it('renders default account number and account balance from the namespaced getters', () => {
-    const wrapper = shallowMount(Account, { store, localVue });
-
     expect(wrapper.find('#account').text().trim()).to.eq(account);
     expect(wrapper.find('#balance').text().trim()).to.eq(balance);
   });

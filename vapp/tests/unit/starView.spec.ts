@@ -15,6 +15,7 @@ describe('StarView.vue', () => {
   let store: any;
   const star = 'A new star!';
   const tokenId = '9899112';
+  let wrapper: any;
 
   // Note: requestAnimationFrame is defined here due to this issue
   // https://github.com/vuejs/vue-test-utils/issues/974
@@ -48,15 +49,14 @@ describe('StarView.vue', () => {
         },
       },
     });
+    wrapper = shallowMount(StarView, { localVue, store });
   });
 
   it('renders with a default form and message', () => {
-    const wrapper = shallowMount(StarView, { localVue, store });
     expect(wrapper.find('#name').text().trim()).to.eq(name);
   });
 
   it('renders the star name when button clicked', async () => {
-    const wrapper = shallowMount(StarView, { localVue, store });
     const button = wrapper.find('#btnGetStarInfo');
     await button.trigger('click');
     expect(wrapper.find('#name').text().trim()).to.eq(star);
@@ -65,14 +65,13 @@ describe('StarView.vue', () => {
   it('updates the components tokenId data when the text field is updated', async () => {
     // Note: have to use mount here due to this issue:
     // https://github.com/vuejs/vue-test-utils/issues/957
-    const wrapper = mount(StarView, { localVue, store });
+    wrapper = mount(StarView, { localVue, store });
     const textInput = wrapper.find('#fieldTokenId');
     textInput.setValue(tokenId);
     expect(wrapper.vm.$data.tokenId).to.eq(tokenId);
   });
 
   it('should call the lookUptokenIdToStarInfo function and pass in the tokenID', async () => {
-    const wrapper = mount(StarView, { localVue, store });
     // Set the tokenId on the components data collection to a known value
     wrapper.vm.$data.tokenId = tokenId;
     // Spy on the lookUptokenIdToStarInfo function call
