@@ -15,6 +15,7 @@
     <v-card-text class="text--primary">
       <form>
         <v-text-field
+          id="fieldTokenId"
           label="Star TokenId"
           v-model="tokenId"
           type="text"

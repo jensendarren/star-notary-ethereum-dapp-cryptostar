@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@drizzle/vue-plugin": "^0.1.1",
+    "@types/sinon": "^9.0.4",
     "core-js": "^3.6.5",
+    "sinon": "^9.0.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
