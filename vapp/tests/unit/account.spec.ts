@@ -2,12 +2,13 @@ import { expect } from 'chai';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Account from '@/components/Account.vue';
 import Vuex from 'vuex';
-import Vuetify from 'vuetify';
+// import Vuetify from 'vuetify';
 
 const localVue = createLocalVue();
 
+// Commented out due to bug when including Vuetfiy multipe times
+// localVue.use(Vuetify);
 localVue.use(Vuex);
-localVue.use(Vuetify);
 
 describe('Account.vue', () => {
   let store: any;
