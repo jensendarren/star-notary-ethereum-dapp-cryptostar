@@ -15,6 +15,9 @@ describe('StarView.vue', () => {
   // let wrapper: any;
   const star = 'A new star!';
 
+  // Note: requestAnimationFrame is defined here due to this issue
+  // https://github.com/vuejs/vue-test-utils/issues/974
+  // which occurs due to haveing to use mount for issue below!
   const requestAnimationFrame = (fn: Function) => fn();
   globalThis.requestAnimationFrame = requestAnimationFrame;
 
@@ -59,6 +62,8 @@ describe('StarView.vue', () => {
   });
 
   it('updates the components tokenId data when the text field is updated', async () => {
+    // Note: have to use mount here due to this issue:
+    // https://github.com/vuejs/vue-test-utils/issues/957
     const wrapper = mount(StarView, { localVue });
     const textInput = wrapper.find('#fieldTokenId');
     textInput.setValue('123');
