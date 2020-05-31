@@ -62,6 +62,20 @@ describe('StarView.vue', () => {
     expect(wrapper.find('#name').text().trim()).to.eq(star);
   });
 
+  it('tokenId is bound between the field and the component data', async () => {
+    // Get the text input that we want to monitor for data binding
+    let textInput = wrapper.find('#fieldTokenId');
+    // Confirm that the value is an empty string
+    expect(textInput.html().toString()).to.contain('value=""');
+    // Call setData on the component for tokenId to trigger an update to the field
+    await wrapper.setData({ tokenId });
+    textInput = wrapper.find('#fieldTokenId');
+    // Confirm the valule property is set to the tokenId
+    // Note using this 'hack' since to interact with form componetns requires a full
+    // mount which causes other issues with the test (see test below)
+    expect(textInput.html().toString()).to.contain(`value="${tokenId}"`);
+  });
+
   xit('updates the components tokenId data when the text field is updated', async () => {
     // Note: have to use mount here due to this issue:
     // https://github.com/vuejs/vue-test-utils/issues/957
