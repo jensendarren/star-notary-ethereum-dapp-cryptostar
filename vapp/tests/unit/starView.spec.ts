@@ -13,7 +13,7 @@ localVue.use(Vuetify);
 describe('StarView.vue', () => {
   const name = 'Enter the Token ID to see your star name.';
   let store: any;
-  const star = 'A new star!';
+  const star = 'A registered star!';
   const tokenId = '9899112';
   let wrapper: any;
 
@@ -62,7 +62,7 @@ describe('StarView.vue', () => {
     expect(wrapper.find('#name').text().trim()).to.eq(star);
   });
 
-  it('updates the components tokenId data when the text field is updated', async () => {
+  xit('updates the components tokenId data when the text field is updated', async () => {
     // Note: have to use mount here due to this issue:
     // https://github.com/vuejs/vue-test-utils/issues/957
     wrapper = mount(StarView, { localVue, store });

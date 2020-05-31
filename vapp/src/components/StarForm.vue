@@ -20,12 +20,14 @@
           </ul>
         </p>
         <v-text-field
+          id="fieldName"
           label="Star Name"
           v-model="name"
           type="text"
           required=true
         ></v-text-field>
         <v-text-field
+          id="fieldTokenId"
           label="Token Id"
           v-model="tokenId"
           type="number"
@@ -48,7 +50,8 @@
             label="Constellation"
           ></v-select>
         </p>
-        <v-btn @click.prevent='onSubmit'
+        <v-btn id='btnCreateStar'
+                @click.native='onSubmit'
                 outlined
                 color='primary'>
           Create Star
@@ -113,5 +116,4 @@ export default class StarForm extends Vue {
 </script>
 
 <style>
-  label { font-weight: bold; }
 </style>
