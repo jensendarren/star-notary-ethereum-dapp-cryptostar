@@ -1,5 +1,6 @@
 <template>
   <v-card
+    id='starFormCard'
     class="mx-auto"
     max-width="400"
   >
@@ -33,11 +34,13 @@
           type="number"
         ></v-text-field>
         <v-text-field
+          id="fieldDeclination"
           label="Declination"
           v-model="declination"
           type="number"
         ></v-text-field>
         <v-text-field
+          id="fieldMagnitude"
           label="Magnitude"
           v-model="magnitude"
           type="number"

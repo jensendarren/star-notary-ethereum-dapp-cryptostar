@@ -1,5 +1,6 @@
 <template>
   <v-card
+    id='starViewCard'
     class="mx-auto"
     max-width="400"
   >
