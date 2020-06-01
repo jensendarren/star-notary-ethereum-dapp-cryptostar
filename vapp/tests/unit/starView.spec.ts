@@ -76,9 +76,11 @@ describe('StarView.vue', () => {
     expect(textInput.html().toString()).to.contain(`value="${tokenId}"`);
   });
 
+  // Ignoring this test for the time being as it requires a full component mount
+  // which ends up causing an error: 'Cannot read property 'rtl' of undefined'
+  // Without a full mount its not possible to call the setValue method on the
+  // component. This is a known issue: https://github.com/vuejs/vue-test-utils/issues/957
   xit('updates the components tokenId data when the text field is updated', async () => {
-    // Note: have to use mount here due to this issue:
-    // https://github.com/vuejs/vue-test-utils/issues/957
     wrapper = mount(StarView, { localVue, store });
     const textInput = wrapper.find('#fieldTokenId');
     textInput.setValue(tokenId);
