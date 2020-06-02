@@ -9,20 +9,20 @@ module.exports = {
       .end();
   },
 
-  'it should be possible to claim a new star via the homepage form': (brower) => {
-    brower
+  'it should be possible to claim a new star via the homepage form': (browser) => {
+    browser
       .openHomepage()
       .waitForElementVisible('#starFormCard', 8000)
-      .setValue( "#starFormCard #fieldName", 'Jesus' )
+      .setValue( "#starFormCard #fieldName", 'North Star' )
       .setValue( "#starFormCard #fieldTokenId", '929292' )
       .setValue( "#starFormCard #fieldDeclination", '1' )
       .setValue( "#starFormCard #fieldMagnitude", '10' )
       .click("#btnCreateStar")
-      .pause(2000)
+      .pause(8000)
       // cannot assert this until we can avoid requiring to sign the
       // transaction with MetaMask. Possibile solution is to sign
       // the transaction dynamically in the application specifically for this test
-      // .assert.containsText('#app', 'StarClaimedEvent')
+      .assert.containsText('#app', 'StarClaimedEvent')
       .end()
   },
 

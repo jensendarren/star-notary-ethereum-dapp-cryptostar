@@ -10,14 +10,26 @@
  *   https://nightwatchjs.org/guide/extending-nightwatch/#writing-custom-commands
  *
  */
-module.exports = {
-  async command() {
-    // Other Nightwatch commands are available via "this"
-    // .init() simply calls .url() command with the value of the "launch_url" setting
-    this.init();
-    this.waitForElementVisible('#app');
 
-    // const result = await this.elements('css selector', '#app ul');
-    // this.assert.strictEqual(result.value.length, 3);
+const PrivateKeyProvider = require("truffle-privatekey-provider");
+
+module.exports = {
+
+  async command() {
+
+    const provider = new PrivateKeyProvider(
+      "8c8d57550b7f0d0d9410d842f3a9188d316e85a28daab498231e7577e863c643",
+      "http://localhost:8545"
+    );
+
+    this.init()
+
+    // this.window.web3 is undefined
+    // how to inject the PrivateKeyProvider so
+    // that these e2e tests can pass?
+    console.log('this.window.web3', this.window.web3);
+
+
+    this.waitForElementVisible('#app');
   },
 };

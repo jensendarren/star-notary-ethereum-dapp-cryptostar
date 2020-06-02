@@ -51,8 +51,14 @@
           >
             <StarView />
           </v-col>
+          <v-col
+            cols="12"
+            sm="4"
+          >
+            <StarSell />
+          </v-col>
         </v-row>
-        <Starbar />
+        <StarBar />
       </v-container>
     </div>
     <div v-else>
@@ -65,17 +71,19 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 import Account from './components/Account.vue';
-import Starbar from './components/Starbar.vue';
+import StarBar from './components/StarBar.vue';
 import StarView from './components/StarView.vue';
 import StarForm from './components/StarForm.vue';
+import StarSell from './components/StarSell.vue';
 
 @Component({
   name: 'app',
   components: {
     Account,
-    Starbar,
+    StarBar,
     StarView,
     StarForm,
+    StarSell,
   },
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'isDrizzleInitialized']),

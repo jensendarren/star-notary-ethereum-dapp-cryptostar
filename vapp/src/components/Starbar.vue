@@ -13,9 +13,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
-  name: 'Starbar',
+  name: 'StarBar',
 })
-export default class Starbar extends Vue {
+export default class StarBar extends Vue {
   show = false;
 
   text = '';
