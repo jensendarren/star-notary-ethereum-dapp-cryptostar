@@ -16,6 +16,8 @@ This project was built using the following framework versions:
 * Node v12.14.1
 * Web3.js v1.2.1
 * Truffle Assertions v0.9.2
+* Drizzle Vue Plugin v0.1.1
+* VueJS 2.6.11
 
 ## ERC-721 Token Name
 
@@ -52,12 +54,12 @@ truffle(develop)> migrate --reset
 truffle(develop)> test
 ```
 
-To run the front end app, keep truffle running and go to a new terminal window and run:
+To run the front end app, which is built using Vue JS / Drizzle, keep Ganache running and go to a new terminal window and run:
 
 ```
-cd app
+cd vapp
 npm install
-npm run dev
+npm run serve
 ```
 
 ### Travis CI Setup
@@ -68,7 +70,7 @@ Thanks to [this post](https://blog.coinfabrik.com/test-solidity-smart-contracts-
 
 If you experience with bugs or need further improvement, please create a new issue under [Issues](https://github.com/jensendarren/star-notary-ethereum-dapp-cryptostar/issues).
 
-### Contributing to this private blockchain!
+### Contributing to the Star Notary App!
 
 Pull requests are very welcome. Before submitting a pull request, please make sure that your changes are well tested. Pull requests without tests will not be accepted. In this project we currently use Jest and Supertest.
 
@@ -83,3 +85,24 @@ This **Star Notary Ethereum Dapp** application is released under [AGPL](http://w
 ### Disclaimer
 
 This application is part of a _project assignment_ and is most definitely __not__ suitable for Production use! :)
+
+### Remaining issues / ideas
+
+* Get e2e tests working by injecting web3: https://github.com/trufflesuite/drizzle/issues/91
+* Deploy of static Drizzle / VueJS Dapp to free host: https://www.netlify.com/
+* Deploy updated contracts to testnet
+* Deploy unit tests and e2e tests Travis CI
+* Emit a new owner event for when a star is sold and show in app using the StarBar component
+* Reuse contracts object in the mocking for all unit specs
+* Use sinon instead of a native promise to return the star name in the unit test
+* Integrate https://tool.smartdec.net/
+* Add an image of the star and upload using IPFS
+* Add validation to the Read a Star component
+* Update the app ico icon and app title tag
+* Clean up layout of the app, fix spacing, responsiveness, form rendering, button rendering and so on
+* Add the new fields to Read Star
+* Add screen captures to repository README
+* Use the dataKey in cacheSend to display the transaction status.
+* Show the validation messages around the corresponding form fields
+* Add a footer to the web ui
+* Check the output `GET http://192.168.0.149:8080/sockjs-node/info?t=1590735244963 net::ERR_ADDRESS_UNREACHABLE` in console
