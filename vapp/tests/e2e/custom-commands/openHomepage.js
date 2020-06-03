@@ -12,24 +12,27 @@
  */
 
 const PrivateKeyProvider = require("truffle-privatekey-provider");
+const Web3 = require("web3");
 
 module.exports = {
 
   async command() {
+    this.init();
 
-    const provider = new PrivateKeyProvider(
-      "8c8d57550b7f0d0d9410d842f3a9188d316e85a28daab498231e7577e863c643",
-      "http://localhost:8545"
-    );
+    // NOTE: Unfortunately this does not work since Drizzle has already
+    // initialized and is using the fallback option. So I still
+    // need to gigure out how to set a custom provider when using Drizzle
+    // https://github.com/trufflesuite/drizzle/issues/91
+    this.execute(function() {
+      return window.web3;
+    }, [], function(result) {
+      const provider = new PrivateKeyProvider(
+        "8c8d57550b7f0d0d9410d842f3a9188d316e85a28daab498231e7577e863c643",
+        "http://localhost:8545"
+      );
+      result.value = new Web3(provider);
+    })
 
-    this.init()
-
-    // this.window.web3 is undefined
-    // how to inject the PrivateKeyProvider so
-    // that these e2e tests can pass?
-    console.log('this.window.web3', this.window.web3);
-
-
-    this.waitForElementVisible('#app');
+    this.waitForElementVisible('#app')
   },
 };
