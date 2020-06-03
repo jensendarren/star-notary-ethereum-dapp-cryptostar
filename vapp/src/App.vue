@@ -57,6 +57,12 @@
           >
             <StarSell />
           </v-col>
+          <v-col
+            cols="12"
+            sm="4"
+          >
+            <StarBuy />
+          </v-col>
         </v-row>
         <StarBar />
       </v-container>
@@ -75,6 +81,7 @@ import StarBar from './components/StarBar.vue';
 import StarView from './components/StarView.vue';
 import StarForm from './components/StarForm.vue';
 import StarSell from './components/StarSell.vue';
+import StarBuy from './components/StarBuy.vue';
 
 @Component({
   name: 'app',
@@ -84,6 +91,7 @@ import StarSell from './components/StarSell.vue';
     StarView,
     StarForm,
     StarSell,
+    StarBuy,
   },
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'isDrizzleInitialized']),

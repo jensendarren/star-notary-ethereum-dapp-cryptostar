@@ -1,6 +1,6 @@
 <template>
   <v-card
-    id='starSellCard'
+    id='starBuyCard'
     class="mx-auto"
     max-width="400"
   >
@@ -9,8 +9,8 @@
         height="200px"
         src="@/assets/stars.jpg"
       >
-        <v-card-title>Sell a star</v-card-title>
-        <v-card-subtitle class="pb-0">Complete the form below to sell your star!</v-card-subtitle>
+        <v-card-title>Buy a star</v-card-title>
+        <v-card-subtitle class="pb-0">Complete the form below to buy your star!</v-card-subtitle>
     </v-img>
     <v-card-text class="text--primary">
       <form>
@@ -28,15 +28,15 @@
         ></v-text-field>
         <v-text-field
           id="fieldPrice"
-          label="Set Price (in Ether)"
+          label="Price (in Ether)"
           v-model="price"
           type="number"
         ></v-text-field>
-        <v-btn id='btnSellStar'
+        <v-btn id='btnBuyStar'
                 @click.native='onSubmit'
                 outlined
                 color='primary'>
-          Sell Star
+          Buy Star
         </v-btn>
       </form>
     </v-card-text>
@@ -48,15 +48,15 @@ import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 
 @Component({
-  name: 'StarSell',
+  name: 'StarBuy',
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance']),
   },
 })
-export default class StarSell extends Vue {
+export default class StarBuy extends Vue {
   tokenId='';
 
-  price='';
+  price = '';
 
   errors= [];
 
@@ -64,24 +64,20 @@ export default class StarSell extends Vue {
     if (this.validate()) {
       this.drizzleInstance
         .contracts.StarNotary
-        .methods.putStarUpForSale
-        .cacheSend(this.tokenId, this.drizzleInstance.web3.utils.toWei(this.price, "ether"));
+        .methods.buyStar
+        .cacheSend(this.tokenId, {value: this.drizzleInstance.web3.utils.toWei(this.price, "ether")});
     }
   }
 
   validate() {
     this.errors = [];
 
-    if (this.tokenId && this.price) {
+    if (this.tokenId) {
       return true;
     }
 
     if (!this.tokenId) {
       this.errors.push('Token Id required.');
-    }
-
-    if (!this.price) {
-      this.errors.push('Price required.');
     }
 
     return this.errors.length === 0;
