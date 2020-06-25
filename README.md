@@ -41,26 +41,47 @@ To run the backend local development Ethereum Blockchain using Truffle, simply r
 npm install
 touch .secret
 ganache-cli -m 'theme narrow finger canal enact photo census miss economy hotel often'
-truffle console
+
 ```
 
 Note that optionally you can pass in `-i PORT` and `-b blockrate` to `ganache-cli`.
 
-In the truffle develop console, compile and migrate the contracts (so that you can interact with them in the front end later) and also run the tests like so:
+In a new terminal window, compile and migrate the contracts (so that you can interact with them in the front end later) and also run the tests. The script below also installs and runs the Vue JS application:
 
 ```
-truffle(develop)> compile
-truffle(develop)> migrate --reset
-truffle(develop)> test
-```
-
-To run the front end app, which is built using Vue JS / Drizzle, keep Ganache running and go to a new terminal window and run:
-
-```
+truffle compile
+truffle test
+truffle migrate --reset
 cd vapp
 npm install
 npm run serve
 ```
+
+### Application screen shots and flow
+
+__Initial view of application__
+
+<img src="./img/1-inital-app-view.png" alt="drawing" width="400"/>
+
+__Claim a star__
+
+<img src="./img/2-claiming-a-star.png" alt="drawing" width="400"/>
+
+__Star climed__
+
+<img src="./img/3-star-claimed-notifcation.png" alt="drawing" width="400"/>
+
+__Sell a Star__
+
+<img src="./img/4-sell-star.png" alt="drawing" width="400"/>
+
+__Buy a Star without sufficient Ether__
+
+<img src="./img/5-buy-a-star-without-sufficient-ether.png" alt="drawing" width="400"/>
+
+__Not enough ether error reported in Ganache__
+
+<img src="./img/6-error-reported-in-ganache.png" alt="drawing" width="400"/>
 
 ### Travis CI Setup
 
@@ -89,7 +110,7 @@ This application is part of a _project assignment_ and is most definitely __not_
 ### Remaining issues / ideas
 
 * Get e2e tests working by injecting web3: https://github.com/trufflesuite/drizzle/issues/91
-* Deploy of static Drizzle / VueJS Dapp to free host: https://www.netlify.com/
+* Deploy static Drizzle / VueJS Dapp to free host: https://www.netlify.com/
 * Deploy updated contracts to testnet
 * Deploy unit tests and e2e tests Travis CI
 * Emit a new owner event for when a star is sold and show in app using the StarBar component

@@ -65,7 +65,7 @@ export default class StarSell extends Vue {
       this.drizzleInstance
         .contracts.StarNotary
         .methods.putStarUpForSale
-        .cacheSend(this.tokenId, this.drizzleInstance.web3.utils.toWei(this.price, "ether"));
+        .cacheSend(this.tokenId, this.drizzleInstance.web3.utils.toWei(this.price, 'ether'));
     }
   }
 
