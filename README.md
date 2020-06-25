@@ -52,7 +52,7 @@ In a new terminal window, compile and migrate the contracts (so that you can int
 truffle compile
 truffle test
 truffle migrate --reset
-cd vapp
+cd app
 npm install
 npm run serve
 ```
