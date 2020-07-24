@@ -4,7 +4,7 @@
 
 ## A Star Notary Ethereum Dapp (CryptoStar). Written using Solidity, web3.js and the Truffle Webpack Box
 
-This application is the second Project for the [Blockchain Nanodegree](https://www.udacity.com/course/blockchain-developer-nanodegree--nd1309) with __Udacity__. Enjoy and feel free to comment!
+This application makes use of ERC-721 token standards to make a cliam of ownership for specific stars in the night sky!
 
 ## Truffle version and OpenZeppelin version used in the project.
 
