@@ -15,6 +15,7 @@ describe('StarView.vue', () => {
   let store: any;
   const star = 'A registered star!';
   const tokenId = '9899112';
+  const cid = 'QmXypEvNBbJKtRukk6oFpA8RqvtsiamqjnEX8qz6vTaJ3m'; // for IPFS
   let wrapper: any;
 
   // Note: requestAnimationFrame is defined here due to this issue
@@ -24,7 +25,7 @@ describe('StarView.vue', () => {
   globalThis.requestAnimationFrame = requestAnimationFrame;
 
   // Mock web3 call() function to return a Promise that returns the star name
-  const call = () => new Promise((resolve) => resolve(star));
+  const call = () => new Promise((resolve) => resolve([star, cid]));
 
   // Mock the drizzle contracts so that the call is made
   const contracts = {

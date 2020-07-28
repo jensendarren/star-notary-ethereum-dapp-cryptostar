@@ -14,6 +14,7 @@ describe('StarForm.vue', () => {
   let store: any;
   const star = 'A new star!';
   const tokenId = '9899112';
+  const ifpsCid = 'QmXypEvNBbJKtRukk6oFpA8RqvtsiamqjnEX8qz6vTaJ3m';
   let wrapper: any;
 
   // Mock the drizzle contracts so that the call is made
@@ -25,7 +26,8 @@ describe('StarForm.vue', () => {
             cacheSend: (name: string,
               id: string,
               declination: number,
-              magnitude: number) => true,
+              magnitude: number,
+              cid: string) => true,
           },
         },
       },
@@ -62,6 +64,7 @@ describe('StarForm.vue', () => {
     wrapper.vm.$data.tokenId = tokenId;
     wrapper.vm.$data.declination = 1;
     wrapper.vm.$data.magnitude = 2;
+    wrapper.vm.$data.cid = ifpsCid;
     // Spy on the lookUptokenIdToStarInfo function call
     const spy = sinon.spy(contracts.contracts.StarNotary.methods.createStar, 'cacheSend');
     // Find the getStarInfo button and click it
@@ -69,6 +72,6 @@ describe('StarForm.vue', () => {
     await button.trigger('click');
     // Assert that the lookUptokenIdToStarInfo was called once with the expected tokenId
     expect(spy.calledOnce).to.eq(true);
-    expect(spy.calledWith(star, tokenId, 1, 2)).to.eq(true);
+    expect(spy.calledWith(star, tokenId, 1, 2, '')).to.eq(true);
   });
 });

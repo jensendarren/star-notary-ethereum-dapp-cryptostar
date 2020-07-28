@@ -116,8 +116,8 @@ export default class StarForm extends Vue {
       let res;
       if (this.$store.state.buffer) {
         res = await this.ipfsService.add(this.$store.state.buffer);
+        this.starCid = res.cid.string;
       }
-      this.starCid = res.cid.string;
       this.drizzleInstance
         .contracts.StarNotary
         .methods.createStar
