@@ -1,7 +1,7 @@
 pragma solidity >=0.4.24;
 
 //Importing openzeppelin-solidity ERC-721 implemented Standard
-import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Metadata.sol";
+import "openzeppelin-solidity/contracts/token/ERC721/ERC721Metadata.sol";
 
 // StarNotary Contract declaration inheritance the ERC721 openzeppelin implementation
 contract StarNotary is ERC721Metadata {
@@ -14,6 +14,7 @@ contract StarNotary is ERC721Metadata {
         string name;
         uint8 declination;
         uint8 magnitude;
+        string cid;
     }
 
     // mapping the Star with the Owner Address
@@ -28,11 +29,13 @@ contract StarNotary is ERC721Metadata {
     function createStar(string memory _name,
                         uint256 _tokenId,
                         uint8 _declination,
-                        uint8 _magnitude) public { // Passing the name and tokenId as a parameters
+                        uint8 _magnitude,
+                        string memory _starCid) public { // Passing the name and tokenId as a parameters
         Star memory newStar = Star({
             name: _name,
             declination: _declination,
-            magnitude: _magnitude
+            magnitude: _magnitude,
+            cid: _starCid
         }); // Star is an struct so we are creating a new Star
         tokenIdToStarInfo[_tokenId] = newStar; // Creating in memory the Star -> tokenId mapping
         _mint(msg.sender, _tokenId); // _mint assign the the star with _tokenId to the sender address (ownership)
@@ -44,7 +47,6 @@ contract StarNotary is ERC721Metadata {
         require(ownerOf(_tokenId) == msg.sender, "You can't sell a Star you don't own!");
         starsForSale[_tokenId] = _price;
     }
-
 
     // Function that allows you to convert an address into a payable address
     function _make_payable(address x) internal pure returns (address payable) {
@@ -65,8 +67,8 @@ contract StarNotary is ERC721Metadata {
     }
 
     // lookUptokenIdToStarInfo provides a lookup of a star struct given a valid tokenId
-    function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory) {
-        return tokenIdToStarInfo[_tokenId].name;
+    function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory, string memory) {
+        return (tokenIdToStarInfo[_tokenId].name, tokenIdToStarInfo[_tokenId].cid);
     }
 
     // exchangeStars function can be used to exchange stars between two differnet owners of stars

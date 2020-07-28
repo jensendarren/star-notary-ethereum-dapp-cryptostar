@@ -11,6 +11,9 @@
     >
       <v-card-title>Read a Star</v-card-title>
       <v-card-subtitle id="name" class="pb-0">{{ name }}</v-card-subtitle>
+      <v-card-subtitle id="cid" class="pb-0">
+        <a :href="starImageUrl" target="new">{{ cid }}</a>
+      </v-card-subtitle>
     </v-img>
 
     <v-card-text class="text--primary">
@@ -39,17 +42,23 @@ import { mapGetters } from 'vuex';
   name: 'StarView',
   computed: {
     ...mapGetters('drizzle', ['drizzleInstance', 'drizzleState']),
+    starImageUrl() {
+      return `http://127.0.0.1:8080/ipfs/${this.cid}`;
+    },
   },
 })
 export default class StarView extends Vue {
   tokenId= '';
 
+  cid = '';
+
   name='Enter the Token ID to see your star name.';
 
   async getStarInfo() {
-    this.name = await this.drizzleInstance
+    const res = await this.drizzleInstance
       .contracts.StarNotary
       .methods.lookUptokenIdToStarInfo(this.tokenId).call();
+    [this.name, this.cid] = Object.values(res);
   }
 }
 </script>

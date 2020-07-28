@@ -12,6 +12,7 @@ contract('StarNotary', (accs) => {
     name = 'Awesome Star!'
     declination = 90
     magnitude = 10
+    cid = 'QmXypEvNBbJKtRukk6oFpA8RqvtsiamqjnEX8qz6vTaJ3m' // for IPFS
 });
 
 // Helper function for returning a uniq tokenId for this test run
@@ -38,7 +39,7 @@ describe('creating new stars', () => {
         instance = await StarNotary.deployed();
     })
     it('can Create a Star', async () => {
-        await instance.createStar(name, tokenId, declination, magnitude, {from: accounts[0]})
+        await instance.createStar(name, tokenId, declination, magnitude, cid, {from: accounts[0]})
         star = await instance.tokenIdToStarInfo.call(tokenId)
         assert.equal(star.name, name, 'Error: new star name does not match')
         assert.equal(star.declination, declination, 'Error: new star declination does not match')
@@ -46,7 +47,7 @@ describe('creating new stars', () => {
     });
     it('should emit a new StarClaimedEvent', async () => {
         let name = 'A new event Star!';
-        let res = await instance.createStar(name, tokenId, declination, magnitude, {from: accounts[0]})
+        let res = await instance.createStar(name, tokenId, declination, magnitude, cid, {from: accounts[0]})
         truffleAssert.eventEmitted(res, 'StarClaimedEvent', (e) => {
             return e.tokenId == tokenId && e.name == name
         })
@@ -59,7 +60,7 @@ describe('buying and selling stars', () => {
         let user1 = accounts[1];
         let starId = nextTokenId();
         let starPrice = web3.utils.toWei(".01", "ether");
-        await instance.createStar(name, starId, declination, magnitude, {from: user1});
+        await instance.createStar(name, starId, declination, magnitude, cid, {from: user1});
         await instance.putStarUpForSale(starId, starPrice, {from: user1});
         assert.equal(await instance.starsForSale.call(starId), starPrice);
     });
@@ -71,7 +72,7 @@ describe('buying and selling stars', () => {
         let starId = nextTokenId();
         let starPrice = web3.utils.toWei(".01", "ether");
         let balance = web3.utils.toWei(".05", "ether");
-        await instance.createStar(name, starId, declination, magnitude, {from: user1});
+        await instance.createStar(name, starId, declination, magnitude, cid, {from: user1});
         await instance.putStarUpForSale(starId, starPrice, {from: user1});
         let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user1);
         await instance.buyStar(starId, {from: user2, value: balance});
@@ -88,7 +89,7 @@ describe('buying and selling stars', () => {
         let starId = nextTokenId();
         let starPrice = web3.utils.toWei(".01", "ether");
         let balance = web3.utils.toWei(".05", "ether");
-        await instance.createStar(name, starId, declination, magnitude, {from: user1});
+        await instance.createStar(name, starId, declination, magnitude, cid, {from: user1});
         await instance.putStarUpForSale(starId, starPrice, {from: user1});
         let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user2);
         await instance.buyStar(starId, {from: user2, value: balance});
@@ -102,7 +103,7 @@ describe('buying and selling stars', () => {
         let starId = nextTokenId();
         let starPrice = web3.utils.toWei(".01", "ether");
         let balance = web3.utils.toWei(".05", "ether");
-        await instance.createStar(name, starId, declination, magnitude, {from: user1});
+        await instance.createStar(name, starId, declination, magnitude, cid, {from: user1});
         await instance.putStarUpForSale(starId, starPrice, {from: user1});
         const balanceOfUser2BeforeTransaction = await web3.eth.getBalance(user2);
         await instance.buyStar(starId, {from: user2, value: balance, gasPrice:0});
@@ -118,16 +119,17 @@ describe('function lookUptokenIdToStarInfo()', () => {
         let starName = 'JensenStar'
         let tokenId = nextTokenId();
         let instance = await StarNotary.deployed()
-        await instance.createStar(starName, tokenId, declination, magnitude, {from: owner})
+        await instance.createStar(starName, tokenId, declination, magnitude, cid, {from: owner})
         // Call the lookUptokenIdToStarInfo function
         let starNameLookup = await instance.lookUptokenIdToStarInfo(tokenId)
         // Verify the Star name lookup is the same name
-        assert.equal(starName, starNameLookup)
+        assert.equal(starName, starNameLookup[0])
+        assert.equal(cid, starNameLookup[1])
     })
     it('should return an empty string given a non-existant token id', async () => {
         let instance = await StarNotary.deployed()
         let starNameLookup = await instance.lookUptokenIdToStarInfo(9999999)
-        assert.equal('', starNameLookup)
+        assert.equal('', starNameLookup[0])
     })
 });
 
@@ -144,8 +146,8 @@ describe('function exchangeStars()', () => {
         tokenId2 = nextTokenId();
         // Create 2 Stars with different names and tokenIds
         instance = await StarNotary.deployed()
-        await instance.createStar('StarA',tokenId1, declination, magnitude, {from: user1})
-        await instance.createStar('StarB',tokenId2, declination, magnitude, {from: user2})
+        await instance.createStar('StarA',tokenId1, declination, magnitude, cid, {from: user1})
+        await instance.createStar('StarB',tokenId2, declination, magnitude, cid, {from: user2})
     })
     it('lets 2 users exchange stars', async() => {
         // Call the exchangeStars functions implemented in the Smart Contract
@@ -174,7 +176,7 @@ describe('function transferStar()', () =>{
         tokenId = nextTokenId();
         instance = await StarNotary.deployed();
         // Create a Star with different tokenId
-        await instance.createStar('A Star to Transfer later!', tokenId, declination, magnitude, {from: owner})
+        await instance.createStar('A Star to Transfer later!', tokenId, declination, magnitude, cid, {from: owner})
     })
     it('lets a user transfer a star', async() => {
         // Use the transferStar function implemented in the Smart Contract

@@ -57,6 +57,15 @@ npm install
 npm run serve
 ```
 
+### IPFS
+
+You will also need to run a local IPFS daemon so that the Vue JS app can send uploaded pictures of the star to store there. Note you will need to allow cross origin:
+
+```
+ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+ipfs daemon
+```
+
 ### Application screen shots and flow
 
 __Initial view of application__
@@ -112,12 +121,11 @@ This application is part of a _project assignment_ and is most definitely __not_
 * Get e2e tests working by injecting web3: https://github.com/trufflesuite/drizzle/issues/91
 * Deploy static Drizzle / VueJS Dapp to free host: https://www.netlify.com/
 * Deploy updated contracts to testnet
-* Deploy unit tests and e2e tests Travis CI
+* Deploy e2e tests Travis CI
 * Emit a new owner event for when a star is sold and show in app using the StarBar component
 * Reuse contracts object in the mocking for all unit specs
 * Use sinon instead of a native promise to return the star name in the unit test
 * Integrate https://tool.smartdec.net/
-* Add an image of the star and upload using IPFS
 * Add validation to the Read a Star component
 * Update the app ico icon and app title tag
 * Clean up layout of the app, fix spacing, responsiveness, form rendering, button rendering and so on

@@ -13,7 +13,7 @@
         <v-card-subtitle class="pb-0">Complete the form below to claim your star!</v-card-subtitle>
     </v-img>
     <v-card-text class="text--primary">
-      <form>
+      <form enctype="multipart/form-data">
         <p v-if="errors.length">
           <b>Please correct the following error(s):</b>
           <ul>
@@ -53,6 +53,12 @@
             label="Constellation"
           ></v-select>
         </p>
+        <p>
+          <input  type="file"
+                  @change="handleFileChange"
+                  accept="image/*"/>
+        </p>
+        <p>{{ starCid }}</p>
         <v-btn id='btnCreateStar'
                 @click.native='onSubmit'
                 outlined
@@ -68,6 +74,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { mapGetters } from 'vuex';
 import constellationData from '../store/constellationData.json';
+import ipfs from '../store/ipfs';
 
 @Component({
   name: 'StarForm',
@@ -90,13 +97,38 @@ export default class StarForm extends Vue {
 
   errors= [];
 
-  onSubmit() {
+  starCid='';
+
+  ipfsService=ipfs;
+
+  handleFileChange = (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      this.$store.state.buffer = Buffer.from(reader.result);
+    };
+  }
+
+  async onSubmit() {
     if (this.validate()) {
+      let res;
+      if (this.$store.state.buffer) {
+        res = await this.ipfsService.add(this.$store.state.buffer);
+      }
+      this.starCid = res.cid.string;
       this.drizzleInstance
         .contracts.StarNotary
         .methods.createStar
-        .cacheSend(this.name, this.tokenId, this.declination, this.magnitude);
+        .cacheSend(this.name,
+          this.tokenId,
+          this.declination,
+          this.magnitude,
+          this.starCid);
     }
+    // reset the store buffer and cid
+    this.$store.state.buffer = null;
   }
 
   validate() {
